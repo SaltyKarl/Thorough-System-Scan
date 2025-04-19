@@ -50,8 +50,8 @@ public class TSScan_SystemScaleSensorBurstAbility extends BaseDurationAbility {
 		CampaignFleetAPI fleet = getFleet();
 		if (fleet == null) return;
 
-		fleet.getStats().getSensorRangeMod().modifyFlat(getModId(), -MathUtils.getRandomNumberInRange(0,(int)fleet.getSensorStrength()), "广域传感器扫描");
-		fleet.getStats().getSensorProfileMod().modifyFlat(getModId(), 30000f, "广域传感器扫描");
+		fleet.getStats().getSensorRangeMod().modifyFlat(getModId(), -MathUtils.getRandomNumberInRange(0,(int)fleet.getSensorStrength()), "System Wide Sensor Scan");
+		fleet.getStats().getSensorProfileMod().modifyFlat(getModId(), 30000f, "System Wide Sensor Scan");
 		if (level>=.8f)
 		{
 			if (nowDiscovery == null)
@@ -59,7 +59,7 @@ public class TSScan_SystemScaleSensorBurstAbility extends BaseDurationAbility {
 				nowDiscovery = new TSScan_EntityDiscover(fleet.getStarSystem());
 				Global.getSector().addPing(entity, TSScan_Constants.SYSTEM_SCALE_SENSOR_BURST_PING_FINISH);
 			}
-			fleet.getStats().getSensorRangeMod().modifyFlat(getModId(), 30000f, "广域传感器扫描");
+			fleet.getStats().getSensorRangeMod().modifyFlat(getModId(), 30000f, "System Wide Sensor Scan");
 		}
 		fleet.goSlowOneFrame();
 	}
@@ -93,41 +93,41 @@ public class TSScan_SystemScaleSensorBurstAbility extends BaseDurationAbility {
 		tooltip.addTitle(spec.getName());
 
 		float pad = 10f;
-		tooltip.addPara("超载舰队传感器阵列以获得几乎全星系范围内的信息", pad);
-		tooltip.addPara("将传感器探测范围暂时扩展至全星系,并且极大增加你舰队的被探测范围.当该能力启用时舰队只能 %s** .",
-				pad, highlight,"缓慢移动");
-		tooltip.addPara("受引力场影响,若星系除中心天体外有其他天体,只能在最高轨道天体的L4或L5点附近进行广域传感器扫描.",
+		tooltip.addPara("Overloading fleet sensor arrays to obtain virtually all information system-wide", pad);
+		tooltip.addPara("Temporarily extends sensor range to system wide and dramatically increases the detection range of your fleet.When this ability is active the fleet can only %s",
+				pad, highlight,"Move slowly");
+		tooltip.addPara("Due to the gravitational interference, System Wide Sensor Scan can only be performed in the vicinity of the L4 or L5 point of the highest-orbiting object if the system contains objects other than the central object.",
 				pad);
 		if (getFleet().getSensorRangeMod().computeEffective(getFleet().getSensorStrength())< TSScan_Constants.SENSOR_STRENGTH_NEEDED)
 		{
-			tooltip.addPara("警告:你的舰队传感器强度必须达到 %s 才能有效进行广域传感器扫描!", pad, alarm, highlight, ""+TSScan_Constants.SENSOR_STRENGTH_NEEDED);
+			tooltip.addPara("WARNING: Your fleet's sensor strength must be at %s in order to perform System Wide Sensor Scan!", pad, alarm, highlight, ""+TSScan_Constants.SENSOR_STRENGTH_NEEDED);
 			return;
 		}
 		if (getFleet().isInHyperspace())
-			tooltip.addPara("警告:无法在超空间启用广域传感器扫描!",alarm,pad);
+			tooltip.addPara("WARNING: System Wide Sensor Scan can not be used in hyperspace!",alarm,pad);
 		else {
-			tooltip.addPara("扫描当前星系需要 %s 单位挥发物",pad,highlight,""+(int)computeVolatileCost());
+			tooltip.addPara("Scanning the current system requires %s units of volatiles.",pad,highlight,""+(int)computeVolatileCost());
 			if ((int) computeVolatileCost() > getFleet().getCargo().getCommodityQuantity(Commodities.VOLATILES))
-				tooltip.addPara("警告:你的挥发物储量不足!", alarm, pad);
+				tooltip.addPara("WARNING: Your have insufficient reserves of volatiles!", alarm, pad);
 			else if (!isInScanLocation())
-				tooltip.addPara("前往扫描位置以开始广域传感器扫描", Color.orange, pad);
+				tooltip.addPara("Go to the scan position to start a System Wide Sensor Scan", Color.orange, pad);
 			else if (!isUsable())
-				tooltip.addPara("当前位置可进行广域传感器扫描", Color.yellow, pad);
-			else  tooltip.addPara("当前可进行广域传感器扫描", Color.green, pad);
+				tooltip.addPara("Current location allows System Wide Sensor Scan", Color.yellow, pad);
+			else  tooltip.addPara("Fleet can perform System Wide Sensor Scan", Color.green, pad);
 		}
 		TSScan_CRLoss.CRLoss(true,tooltip);
 		if (!getNonReadyShips().isEmpty()&&!Global.getSettings().isDevMode())
 		{
-			tooltip.addPara("严重警告:以下舰船战备过低,超载传感器可能造成人员及舰船损失:",alarm,pad);
+			tooltip.addPara("SERIOUS WARNING: The following ships are at low combat readiness and overloaded sensors may cause loss of crew and ship.",alarm,pad);
 			List<FleetMemberAPI> members=getNonReadyShips();
 			for (FleetMemberAPI member:members)
 			{
 				tooltip.addPara("   %s %s  "+member.getShipName()+", "+member.getHullSpec().getHullNameWithDashClass(),pad,highlight, String.format("%d%%", (int) (member.getRepairTracker().getCR() * 100)), String.format("%d%%", (int) (TSScan_CRLoss.calculateCRLoss(member))));
 			}
 		}
-		tooltip.addPara("*2000 单位 = 1 地图网格边长", gray, pad);
-		tooltip.addPara("**当舰队最大加速为舰队中最慢舰船速度的一半时,舰队被视作缓慢移动", gray, 0f);
-		tooltip.addPara("***护卫舰下降 %s,驱逐舰下降 %s,巡洋舰下降 %s,主力舰下降 %s", 0f, gray,gray, String.format("%d%%", (int) (TSScan_CRLoss.baseCRDamage * TSScan_CRLoss.lossMultOfSize(ShipAPI.HullSize.FRIGATE))), String.format("%d%%", (int) (TSScan_CRLoss.baseCRDamage * TSScan_CRLoss.lossMultOfSize(ShipAPI.HullSize.DESTROYER))), String.format("%d%%", (int) (TSScan_CRLoss.baseCRDamage * TSScan_CRLoss.lossMultOfSize(ShipAPI.HullSize.CRUISER))), String.format("%d%%", (int) (TSScan_CRLoss.baseCRDamage * TSScan_CRLoss.lossMultOfSize(ShipAPI.HullSize.CAPITAL_SHIP))));
+		tooltip.addPara("*2000 units = 1 map grid cell", gray, pad);
+		tooltip.addPara("**A fleet is considered slow-moving at a burn level of half that of its slowest ship.", gray, 0f);
+		tooltip.addPara("***frigate CR cost %s,destroyer CR cost %s,cruiser CR cost %s,Capital ship CR cost %s", 0f, gray,gray, String.format("%d%%", (int) (TSScan_CRLoss.baseCRDamage * TSScan_CRLoss.lossMultOfSize(ShipAPI.HullSize.FRIGATE))), String.format("%d%%", (int) (TSScan_CRLoss.baseCRDamage * TSScan_CRLoss.lossMultOfSize(ShipAPI.HullSize.DESTROYER))), String.format("%d%%", (int) (TSScan_CRLoss.baseCRDamage * TSScan_CRLoss.lossMultOfSize(ShipAPI.HullSize.CRUISER))), String.format("%d%%", (int) (TSScan_CRLoss.baseCRDamage * TSScan_CRLoss.lossMultOfSize(ShipAPI.HullSize.CAPITAL_SHIP))));
 
 		addIncompatibleToTooltip(tooltip, expanded);
 

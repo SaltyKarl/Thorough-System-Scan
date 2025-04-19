@@ -22,11 +22,11 @@ import data.scripts.TSSCan_SalvageableValue;
 public class TSScan_SalvageReportIntel extends BaseIntelPlugin {
 
     public enum SalvageValue {
-        NONE("无"),
-        LOW("较低"),
-        MEDIUM("中等"),
-        HIGH("较高"),
-        EXTREME("巨大极其非常无穷超级多");
+        NONE("None"),
+        LOW("Low"),
+        MEDIUM("Moderate"),
+        HIGH("High"),
+        EXTREME("EXTREME!!!");
         private final String valueString;
 
         SalvageValue(String value) {
@@ -75,40 +75,40 @@ public class TSScan_SalvageReportIntel extends BaseIntelPlugin {
         if (mode != ListInfoMode.IN_DESC) {
             Color highlight = h;
             if (value == SalvageValue.NONE) highlight = tc;
-            info.addPara("预期稀有物品价值: %s", initPad, tc, highlight, value.getValueString());
+            info.addPara("Expected Rare Item Value: %s", initPad, tc, highlight, value.getValueString());
             initPad = 0f;
         }
         if (value != SalvageValue.NONE)
         {
-            info.addPara("期望获得如下数量的稀有物品(也就是说更多更少都说不定哦):", initPad, tc);
+            info.addPara("Expect to receive the following number of rares (i.e. more or less):", initPad, tc);
             initPad = 0f;
         }
         if (itemCount.get(Commodities.ALPHA_CORE) > 0) {
-            info.addPara("%s 个 %s 级AI核心", initPad, tc, h, "" + itemCount.get(Commodities.ALPHA_CORE).intValue(), "Alpha");
+            info.addPara("%s %s cores", initPad, tc, h, "" + itemCount.get(Commodities.ALPHA_CORE).intValue(), "Alpha");
             initPad = 0f;
         }
         if (itemCount.get(Commodities.BETA_CORE) > 0) {
-            info.addPara("%s 个 %s 级AI核心", initPad, tc, h, "" + itemCount.get(Commodities.BETA_CORE).intValue(), "Beta");
+            info.addPara("%s %s cores", initPad, tc, h, "" + itemCount.get(Commodities.BETA_CORE).intValue(), "Beta");
             initPad = 0f;
         }
         if (itemCount.get(Commodities.GAMMA_CORE) > 0) {
-            info.addPara("%s 个 %s 级AI核心", initPad, tc, h, "" + itemCount.get(Commodities.GAMMA_CORE).intValue(), "Gamma");
+            info.addPara("%s %s cores", initPad, tc, h, "" + itemCount.get(Commodities.GAMMA_CORE).intValue(), "Gamma");
             initPad = 0f;
         }
         if (itemCount.get(Commodities.BLUEPRINTS) > 0) {
-            info.addPara("%s 个舰船、战机联队或武器蓝图", initPad, tc, h, "" + itemCount.get(Commodities.BLUEPRINTS).intValue());
+            info.addPara("%s Ship Weapon or LPC BPs", initPad, tc, h, "" + itemCount.get(Commodities.BLUEPRINTS).intValue());
             initPad = 0f;
         }
         if (itemCount.get(Items.TAG_MODSPEC) > 0) {
-            info.addPara("%s 个舰船插件蓝图", initPad, tc, h, "" + itemCount.get(Items.TAG_MODSPEC).intValue());
+            info.addPara("%s Modspecs", initPad, tc, h, "" + itemCount.get(Items.TAG_MODSPEC).intValue());
             initPad = 0f;
         }
         if (itemCount.get(Items.TAG_COLONY_ITEM) > 0) {
-            info.addPara("%s 个殖民地工业用特殊物品", initPad, tc, h, "" + itemCount.get(Items.TAG_COLONY_ITEM).intValue());
+            info.addPara("%s Colony items", initPad, tc, h, "" + itemCount.get(Items.TAG_COLONY_ITEM).intValue());
             initPad = 0f;
         }
         if (itemCount.get("special_items") > 0) {
-            info.addPara("%s 个其他特殊物品", initPad, tc, h, "" + itemCount.get("special_items").intValue());
+            info.addPara("%s Misc items", initPad, tc, h, "" + itemCount.get("special_items").intValue());
         }
 
         unindent(info);
@@ -152,38 +152,38 @@ public class TSScan_SalvageReportIntel extends BaseIntelPlugin {
         }
 
         if (value == SalvageValue.NONE) {
-            info.addPara("在 " + system.getNameWithLowercaseTypeShort() + "星系中没有探测到稀有物品哦.", opad);
+            info.addPara(system.getNameWithLowercaseTypeShort() + "There is no rare salvage detected in the system.", opad);
         }
         else {
-            info.addPara("好诶！在 " +
-            system.getNameWithLowercaseTypeShort() + "星系中探测到稀有物品. 预计总共有 %s 的价值.",
+            info.addPara(
+            system.getNameWithLowercaseTypeShort() + "Rare salvage have been detected in the system. Estimated total value of %s.",
             opad, h, value.getValueString());
         }
         switch (value)
         {
             case NONE:
             {
-                info.addPara("真是遗憾，下一个星系一定会有不错的收获吧.", opad);
+                info.addPara("It's a shame,Better luck next time.", opad);
                 break;
             }
             case LOW:
             {
-                info.addPara("姑且也算很不错呢，希望超空间今天也平静一点.", opad);
+                info.addPara("Not bad, Hoping we get less storms in hyperspace", opad);
                 break;
             }
             case MEDIUM:
             {
-                info.addPara("好东西真不少，这趟没白来呢.", opad);
+                info.addPara("Not a bad haul, We didn't came to the wrong system.", opad);
                 break;
             }
             case HIGH:
             {
-                info.addPara("我们来对地方了！呀！探测报告太多了！", opad);
+                info.addPara("We've come to the right place! Yay! So many rare responses!", opad);
                 break;
             }
             case EXTREME:
             {
-                info.addPara("这简直是...真不敢相信！", opad);
+                info.addPara("This is just... I can't believe it!", opad);
             }
         }
 
@@ -225,7 +225,7 @@ public class TSScan_SalvageReportIntel extends BaseIntelPlugin {
 
 
     public String getName() {
-        return "广域传感器扫描结果 - " + system.getBaseName();
+        return "System Wide Sensor Scan Results - " + system.getBaseName();
     }
 
 

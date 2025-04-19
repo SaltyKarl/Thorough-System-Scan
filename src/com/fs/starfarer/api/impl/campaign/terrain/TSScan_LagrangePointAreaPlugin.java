@@ -125,7 +125,7 @@ public class TSScan_LagrangePointAreaPlugin extends BaseRingTerrain
 
     @Override
     public String getNameForTooltip() {
-        return "星系广域扫描区域";
+        return "System Wide Sensor Scan";
         //return params.name;
     }
 

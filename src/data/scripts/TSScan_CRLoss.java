@@ -46,18 +46,18 @@ public class TSScan_CRLoss {
         float suppliesToRepair=0;
         if (isPrintingInfo)
         {
-            tooltip.addPara("超载舰队传感器阵列会导致舰队内传感器强度最大的 %s 艘舰船战备值下降***",pad,highlight,""+numProfileShips);
-            tooltip.addPara("会受到影响的舰船如下:",pad);
+            tooltip.addPara("Overloading sensor arrays will causes %s of ships in the fleet with the highest sensor strength to drop CR",pad,highlight,""+numProfileShips);
+            tooltip.addPara("The Following ship will be affected by CR Cost :",pad);
         }
         List<FleetMemberAPI> members= getSensorMembers();
         for (FleetMemberAPI member:members)
         {
             float CRLoss=calculateCRLoss(member);
             suppliesToRepair+=calculateSuppliesToRepair(member);
-            if (!isPrintingInfo)member.getRepairTracker().applyCREvent(CRLoss*.01f, "system_scale_sensor_burst", "广域传感器扫描");
-            else tooltip.addPara("  从 %s 降为 %s  "+member.getShipName()+", "+member.getHullSpec().getHullNameWithDashClass(),pad,highlight, String.format("%d%%", (int) (member.getRepairTracker().getCR() * 100f)), String.format("%d%%", Math.max((int) (member.getRepairTracker().getCR() * 100f + CRLoss), 0)));
+            if (!isPrintingInfo)member.getRepairTracker().applyCREvent(CRLoss*.01f, "system_scale_sensor_burst", "System Wide Sensor Scan");
+            else tooltip.addPara("  From %s to %s  "+member.getShipName()+", "+member.getHullSpec().getHullNameWithDashClass(),pad,highlight, String.format("%d%%", (int) (member.getRepairTracker().getCR() * 100f)), String.format("%d%%", Math.max((int) (member.getRepairTracker().getCR() * 100f + CRLoss), 0)));
         }
-        if (isPrintingInfo)tooltip.addPara("共需要 %s 补给恢复所有损失的战备值",pad,highlight, String.format("%d", (int) -suppliesToRepair));
+        if (isPrintingInfo)tooltip.addPara("Require %s supplies to repair ships to max CR",pad,highlight, String.format("%d", (int) -suppliesToRepair));
     }
 
     public static float lossMultOfSize(ShipAPI.HullSize size)

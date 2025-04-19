@@ -44,7 +44,7 @@ public class TSScan_SystemScanPointsManager
             new TSScan_LagrangePointAreaPlugin.LagrangePointAreaParams(
                 entity.getCircularOrbitRadius()/8f,
                 (PlanetAPI)entity,
-                "第四拉格朗日点",
+                "Fourth Lagrange point",
                 getScanLocation(system,false),
                 false
             )
@@ -54,7 +54,7 @@ public class TSScan_SystemScanPointsManager
             new TSScan_LagrangePointAreaPlugin.LagrangePointAreaParams(
                 entity.getCircularOrbitRadius()/8f,
                 (PlanetAPI)entity,
-                "第五拉格朗日点",
+                "Fifth Lagrangian point",
                 getScanLocation(system,true),
                 true
             )

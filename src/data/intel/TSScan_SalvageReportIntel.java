@@ -152,44 +152,36 @@ public class TSScan_SalvageReportIntel extends BaseIntelPlugin {
                     info.addImage(Global.getSettings().getSpriteName("intel", "TSSHighValue"), imageWidth, opad);
                 }
             }
-        }
-
-        if (value == SalvageValue.NONE) {
-            info.addPara(system.getNameWithLowercaseTypeShort() + "There is no rare salvage detected in the system.", opad);
-        }
-        else {
-            info.addPara(
-            system.getNameWithLowercaseTypeShort() + "Rare salvage have been detected in the system. Estimated total value of %s.",
-            opad, h, value.getValueString());
-        }
-        switch (value)
-        {
-            case NONE:
-            {
-                info.addPara("It's a shame,Better luck next time.", opad);
-                break;
+            if (value == SalvageValue.NONE) {
+                info.addPara(system.getNameWithLowercaseTypeShort() + "There is no rare salvage detected in the system.", opad);
             }
-            case LOW:
-            {
-                info.addPara("Not bad, Hoping we get less storms in hyperspace", opad);
-                break;
+            else {
+                info.addPara(
+                system.getNameWithLowercaseTypeShort() + "Rare salvage have been detected in the system. Estimated total value of %s .",
+                opad, h, value.getValueString());
             }
-            case MEDIUM:
-            {
-                info.addPara("Not a bad haul, We didn't came to the wrong system.", opad);
-                break;
-            }
-            case HIGH:
-            {
-                info.addPara("We've come to the right place! Yay! So many rare responses!", opad);
-                break;
-            }
-            case EXTREME:
-            {
-                info.addPara("This is just... I can't believe it!", opad);
+            switch (value){
+                case NONE: {
+                    info.addPara("It's a shame,Better luck next time.", opad);
+                    break;
+                }
+                case LOW: {
+                    info.addPara("Not bad, Hoping we get less storms in hyperspace", opad);
+                    break;
+                }   
+                case MEDIUM: {
+                    info.addPara("Not a bad haul, We didn't came to the wrong system.", opad);
+                    break;
+                }
+                case HIGH: {
+                    info.addPara("We've come to the right place! Yay! So many rare responses!", opad);
+                    break;
+                }
+                case EXTREME: {
+                    info.addPara("This is just... I can't believe it!", opad);
+                }
             }
         }
-
         addBulletPoints(info, ListInfoMode.IN_DESC);
 
 

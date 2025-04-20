@@ -26,6 +26,8 @@ public class TSScan_SystemScaleSensorBurstAbility extends BaseDurationAbility {
 
 	private static LocationAPI initialLocation;
 
+	private boolean interruptedScan = false;
+
 	@Override
 	protected void activateImpl() {
 		if (entity.isInCurrentLocation()) {
@@ -44,6 +46,7 @@ public class TSScan_SystemScaleSensorBurstAbility extends BaseDurationAbility {
 
 		if (getFleet().getContainingLocation()!=initialLocation)
 		{
+			if (nowDiscovery == null)interruptedScan = true;
 			deactivate();
 			return;
 		}
@@ -77,9 +80,10 @@ public class TSScan_SystemScaleSensorBurstAbility extends BaseDurationAbility {
 		if (nowDiscovery!=null)nowDiscovery.recoverEntities();
 
 		if (TSScan_Constants.REPORT_SHOULD_DISPLAY)
-			Global.getSector().getIntelManager().addIntel(new TSScan_SalvageReportIntel(fleet.getStarSystem()));
+			Global.getSector().getIntelManager().addIntel(new TSScan_SalvageReportIntel((StarSystemAPI) initialLocation, interruptedScan));
 
 		nowDiscovery=null;
+		interruptedScan=false;
 		fleet.getStats().getSensorRangeMod().unmodify(getModId());
 		fleet.getStats().getSensorProfileMod().unmodify(getModId());
 	}

@@ -70,6 +70,8 @@ To do list.
 
 v1.2.2
 
+	Changes:
+		Rare item report expectations are now kept to 1 decimal.
 	Bug Fixes.
 		Fixed a bug where the scan report would still show rare item information after jumping to hyperspace before the scan was complete.
 

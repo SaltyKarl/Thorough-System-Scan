@@ -88,31 +88,31 @@ public class TSScan_SalvageReportIntel extends BaseIntelPlugin {
             initPad = 0f;
         }
         if (itemCount.get(Commodities.ALPHA_CORE) > 0) {
-            info.addPara("%s %s cores", initPad, tc, h, "" + itemCount.get(Commodities.ALPHA_CORE).intValue(), "Alpha");
+            info.addPara("%s %s cores", initPad, tc, h, String.format("%.1f",itemCount.get(Commodities.ALPHA_CORE)), "Alpha");
             initPad = 0f;
         }
         if (itemCount.get(Commodities.BETA_CORE) > 0) {
-            info.addPara("%s %s cores", initPad, tc, h, "" + itemCount.get(Commodities.BETA_CORE).intValue(), "Beta");
+            info.addPara("%s %s cores", initPad, tc, h, String.format("%.1f",itemCount.get(Commodities.BETA_CORE)), "Beta");
             initPad = 0f;
         }
         if (itemCount.get(Commodities.GAMMA_CORE) > 0) {
-            info.addPara("%s %s cores", initPad, tc, h, "" + itemCount.get(Commodities.GAMMA_CORE).intValue(), "Gamma");
+            info.addPara("%s %s cores", initPad, tc, h, String.format("%.1f",itemCount.get(Commodities.GAMMA_CORE)), "Gamma");
             initPad = 0f;
         }
         if (itemCount.get(Commodities.BLUEPRINTS) > 0) {
-            info.addPara("%s Ship Weapon or LPC BPs", initPad, tc, h, "" + itemCount.get(Commodities.BLUEPRINTS).intValue());
+            info.addPara("%s Ship Weapon or LPC BPs", initPad, tc, h, String.format("%.1f",itemCount.get(Commodities.BLUEPRINTS)));
             initPad = 0f;
         }
         if (itemCount.get(Items.TAG_MODSPEC) > 0) {
-            info.addPara("%s Modspecs", initPad, tc, h, "" + itemCount.get(Items.TAG_MODSPEC).intValue());
+            info.addPara("%s Modspecs", initPad, tc, h, String.format("%.1f",itemCount.get(Items.TAG_MODSPEC)));
             initPad = 0f;
         }
         if (itemCount.get(Items.TAG_COLONY_ITEM) > 0) {
-            info.addPara("%s Colony items", initPad, tc, h, "" + itemCount.get(Items.TAG_COLONY_ITEM).intValue());
+            info.addPara("%s Colony items", initPad, tc, h, String.format("%.1f",itemCount.get(Items.TAG_COLONY_ITEM)));
             initPad = 0f;
         }
         if (itemCount.get("special_items") > 0) {
-            info.addPara("%s Misc items", initPad, tc, h, "" + itemCount.get("special_items").intValue());
+            info.addPara("%s Misc items", initPad, tc, h, String.format("%.1f",itemCount.get("special_items")));
         }
 
         unindent(info);

@@ -162,7 +162,7 @@ public class TSScan_SalvageReportIntel extends BaseIntelPlugin {
             }
             switch (value){
                 case NONE: {
-                    info.addPara("It's a shame,Better luck next time.", opad);
+                    info.addPara("It's a shame, Better luck next time.", opad);
                     break;
                 }
                 case LOW: {
@@ -215,7 +215,7 @@ public class TSScan_SalvageReportIntel extends BaseIntelPlugin {
 
 
     public String getName() {
-        return "System Wide Sensor Scan Results - " + system.getBaseName();
+        return "System-Scale Sensor Burst Results - " + system.getBaseName();
     }
 
 

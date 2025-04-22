@@ -1,6 +1,6 @@
 {
 	"id":"thorough_system_scan",
-	"name":"System Wide Sensor Scan",
+	"name":"Thorough System Scan",
 	"version":"1.2.2",
 	"description":"Expend volatiles, combat readiness and time to scan whole system(excluding certain special objects).",
 	"gameVersion":"0.98a",

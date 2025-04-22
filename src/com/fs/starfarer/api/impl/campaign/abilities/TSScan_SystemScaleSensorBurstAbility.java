@@ -53,8 +53,8 @@ public class TSScan_SystemScaleSensorBurstAbility extends BaseDurationAbility {
 		CampaignFleetAPI fleet = getFleet();
 		if (fleet == null) return;
 
-		fleet.getStats().getSensorRangeMod().modifyFlat(getModId(), -MathUtils.getRandomNumberInRange(0,(int)fleet.getSensorStrength()), "System Wide Sensor Scan");
-		fleet.getStats().getSensorProfileMod().modifyFlat(getModId(), 30000f, "System Wide Sensor Scan");
+		fleet.getStats().getSensorRangeMod().modifyFlat(getModId(), -MathUtils.getRandomNumberInRange(0,(int)fleet.getSensorStrength()), "System-Scale Sensor Burst");
+		fleet.getStats().getSensorProfileMod().modifyFlat(getModId(), 30000f, "System-Scale Sensor Burst");
 		if (level>=.8f)
 		{
 			if (nowDiscovery == null)
@@ -62,7 +62,7 @@ public class TSScan_SystemScaleSensorBurstAbility extends BaseDurationAbility {
 				nowDiscovery = new TSScan_EntityDiscover(fleet.getStarSystem());
 				Global.getSector().addPing(entity, TSScan_Constants.SYSTEM_SCALE_SENSOR_BURST_PING_FINISH);
 			}
-			fleet.getStats().getSensorRangeMod().modifyFlat(getModId(), 30000f, "System Wide Sensor Scan");
+			fleet.getStats().getSensorRangeMod().modifyFlat(getModId(), 30000f, "System-Scale Sensor Burst");
 		}
 		fleet.goSlowOneFrame();
 	}
@@ -97,27 +97,27 @@ public class TSScan_SystemScaleSensorBurstAbility extends BaseDurationAbility {
 		tooltip.addTitle(spec.getName());
 
 		float pad = 10f;
-		tooltip.addPara("Overloading fleet sensor arrays to obtain virtually all information system-wide", pad);
-		tooltip.addPara("Temporarily extends sensor range to system wide and dramatically increases the detection range of your fleet.When this ability is active the fleet can only %s",
+		tooltip.addPara("Overload fleet sensor arrays to obtain virtually all information system-wide", pad);
+		tooltip.addPara("Temporarily extend sensor range to system wide and dramatically increases the detection range of your fleet. When this ability is active the fleet can only %s",
 				pad, highlight,"Move slowly");
-		tooltip.addPara("Due to the gravitational interference, System Wide Sensor Scan can only be performed in the vicinity of the L4 or L5 point of the highest-orbiting object if the system contains objects other than the central object.",
+		tooltip.addPara("Due to the gravitational interference, System-Scale Sensor Burst can only be performed in the vicinity of the L4 or L5 point of the highest-orbiting object if the system contains objects other than the central object.",
 				pad);
 		if (getFleet().getSensorRangeMod().computeEffective(getFleet().getSensorStrength())< TSScan_Constants.SENSOR_STRENGTH_NEEDED)
 		{
-			tooltip.addPara("WARNING: Your fleet's sensor strength must be at %s in order to perform System Wide Sensor Scan!", pad, alarm, highlight, ""+TSScan_Constants.SENSOR_STRENGTH_NEEDED);
+			tooltip.addPara("WARNING: Your fleet's sensor strength must be at least %s in order to perform System-Scale Sensor Burst!", pad, alarm, highlight, ""+TSScan_Constants.SENSOR_STRENGTH_NEEDED);
 			return;
 		}
 		if (getFleet().isInHyperspace())
-			tooltip.addPara("WARNING: System Wide Sensor Scan can not be used in hyperspace!",alarm,pad);
+			tooltip.addPara("WARNING: System-Scale Sensor Burst can not be used in hyperspace!",alarm,pad);
 		else {
 			tooltip.addPara("Scanning the current system requires %s units of volatiles.",pad,highlight,""+(int)computeVolatileCost());
 			if ((int) computeVolatileCost() > getFleet().getCargo().getCommodityQuantity(Commodities.VOLATILES))
-				tooltip.addPara("WARNING: Your have insufficient reserves of volatiles!", alarm, pad);
+				tooltip.addPara("WARNING: You have insufficient reserves of volatiles!", alarm, pad);
 			else if (!isInScanLocation())
-				tooltip.addPara("Go to the scan position to start a System Wide Sensor Scan", Color.orange, pad);
+				tooltip.addPara("Go to the scan position to start a System-Scale Sensor Burst", Color.orange, pad);
 			else if (!isUsable())
-				tooltip.addPara("Current location allows System Wide Sensor Scan", Color.yellow, pad);
-			else  tooltip.addPara("Fleet can perform System Wide Sensor Scan", Color.green, pad);
+				tooltip.addPara("current location is suitable for a system-scale sensor burst", Color.yellow, pad);
+			else  tooltip.addPara("Fleet can perform System-Scale Sensor Burst", Color.green, pad);
 		}
 		TSScan_CRLoss.CRLoss(true,tooltip);
 		if (!getNonReadyShips().isEmpty()&&!Global.getSettings().isDevMode())

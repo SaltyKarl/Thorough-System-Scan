@@ -31,4 +31,4 @@ TSSVolatileJumpPoint,Jump point,Double,0.5,,"Default:0.5",0,50,Volatile cost set
 TSSVolatileSalvageable,Salvageable objects,Double,1,,"Default:1",0,50,Volatile cost settings,
 TSS_DisplayHeader,Display settings,Header,Display settings,,,,,Display settings,
 TSSMapDisplay,Show L4 L5 points on system map,Boolean,true,,,,,Display settings,
-TSSReportDisplay,Enable scan to salvage report,Boolean,true,,,,,Display settings
+TSSReportDisplay,Enable scan to Momiji salvage report,Boolean,true,,,,,Display settings

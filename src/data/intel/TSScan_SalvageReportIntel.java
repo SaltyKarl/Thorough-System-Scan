@@ -79,7 +79,7 @@ public class TSScan_SalvageReportIntel extends BaseIntelPlugin {
         if (mode != ListInfoMode.IN_DESC) {
             Color highlight = h;
             if (value == SalvageValue.NONE) highlight = tc;
-            info.addPara("Expected Rare Item Value: %s", initPad, tc, highlight, value.getValueString());
+            info.addPara("Projected value: %s", initPad, tc, highlight, value.getValueString());
             initPad = 0f;
         }
         if (value != SalvageValue.NONE)
@@ -87,32 +87,55 @@ public class TSScan_SalvageReportIntel extends BaseIntelPlugin {
             info.addPara("Expect to receive the following number of rares (i.e. more or less):", initPad, tc);
             initPad = 0f;
         }
+
         if (itemCount.get(Commodities.ALPHA_CORE) > 0) {
-            info.addPara("%s %s cores", initPad, tc, h, String.format("%.1f",itemCount.get(Commodities.ALPHA_CORE)), "Alpha");
+            float alphaCoreAmount = itemCount.get(Commodities.ALPHA_CORE);
+            String s = (alphaCoreAmount > 1) ? "s" : "";
+            s = "s";
+            info.addPara("%s %s core" + s, initPad, tc, h, String.format("%.1f",alphaCoreAmount), "Alpha");
             initPad = 0f;
         }
         if (itemCount.get(Commodities.BETA_CORE) > 0) {
-            info.addPara("%s %s cores", initPad, tc, h, String.format("%.1f",itemCount.get(Commodities.BETA_CORE)), "Beta");
+            float betaCoreAmount = itemCount.get(Commodities.BETA_CORE);
+            String s = (betaCoreAmount > 1) ? "s" : "";
+            s = "s";
+            info.addPara("%s %s core" + s, initPad, tc, h, String.format("%.1f",betaCoreAmount), "Beta");
             initPad = 0f;
         }
         if (itemCount.get(Commodities.GAMMA_CORE) > 0) {
-            info.addPara("%s %s cores", initPad, tc, h, String.format("%.1f",itemCount.get(Commodities.GAMMA_CORE)), "Gamma");
+            float gammaCoreAmount = itemCount.get(Commodities.GAMMA_CORE);
+            String s = (gammaCoreAmount > 1) ? "s" : "";
+            s = "s";
+            info.addPara("%s %s core" + s, initPad, tc, h, String.format("%.1f",gammaCoreAmount), "Gamma");
             initPad = 0f;
         }
         if (itemCount.get(Commodities.BLUEPRINTS) > 0) {
-            info.addPara("%s Ship Weapon or LPC BPs", initPad, tc, h, String.format("%.1f",itemCount.get(Commodities.BLUEPRINTS)));
+            float blueprintAmount = itemCount.get(Commodities.BLUEPRINTS);
+            String s = (blueprintAmount > 1) ? "s" : "";
+            s = "s";
+            info.addPara("%s Ship Weapon or LPC BP" + s, initPad, tc, h, String.format("%.1f",itemCount.get(Commodities.BLUEPRINTS)));
             initPad = 0f;
         }
         if (itemCount.get(Items.TAG_MODSPEC) > 0) {
-            info.addPara("%s Modspecs", initPad, tc, h, String.format("%.1f",itemCount.get(Items.TAG_MODSPEC)));
+            float modspecAmount = itemCount.get(Items.TAG_MODSPEC);
+            String s = (modspecAmount > 1) ? "s" : "";
+            s = "s";
+            info.addPara("%s Modspec" + s, initPad, tc, h, String.format("%.1f",itemCount.get(Items.TAG_MODSPEC)));
             initPad = 0f;
         }
         if (itemCount.get(Items.TAG_COLONY_ITEM) > 0) {
-            info.addPara("%s Colony items", initPad, tc, h, String.format("%.1f",itemCount.get(Items.TAG_COLONY_ITEM)));
+            float colonyitemAmount = itemCount.get(Items.TAG_COLONY_ITEM);
+            String s = (colonyitemAmount > 1) ? "s" : "";
+            s = "s";
+            info.addPara("%s Colony item" + s, initPad, tc, h, String.format("%.1f",itemCount.get(Items.TAG_COLONY_ITEM)));
             initPad = 0f;
         }
         if (itemCount.get("special_items") > 0) {
-            info.addPara("%s Misc items", initPad, tc, h, String.format("%.1f",itemCount.get("special_items")));
+            float special_itemsAmount = itemCount.get("special_items");
+            String s = (special_itemsAmount > 1) ? "s" : "";
+            s = "s";
+            info.addPara("%s Misc item" + s, initPad, tc, h, String.format("%.1f",itemCount.get("special_items")));
+            initPad = 0f;
         }
 
         unindent(info);
@@ -162,15 +185,15 @@ public class TSScan_SalvageReportIntel extends BaseIntelPlugin {
             }
             switch (value){
                 case NONE: {
-                    info.addPara("It's a shame, Better luck next time.", opad);
+                    info.addPara("It's a shame, better luck next time.", opad);
                     break;
                 }
                 case LOW: {
-                    info.addPara("Not bad, Hoping we get less storms in hyperspace", opad);
+                    info.addPara("Not bad, hoping we get less storms in hyperspace", opad);
                     break;
                 }   
                 case MEDIUM: {
-                    info.addPara("Not a bad haul, We didn't came to the wrong system.", opad);
+                    info.addPara("Not a bad haul, we didn't came to the wrong system.", opad);
                     break;
                 }
                 case HIGH: {

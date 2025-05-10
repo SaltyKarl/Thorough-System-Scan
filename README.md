@@ -68,6 +68,13 @@ Scanning Location
 To do list.
 	Feedback that when Loading the save with new gravity wells scan location would move. (Tagged scan location entities so they are skipped in jump point generation.)
 
+v1.2.2.1
+
+	Change:
+	for Performance reasons, rare item salvage log is generalized.
+	bug fix:
+	fix for making salvage log in hyperspace or some other non in system location causing CTD
+
 v1.2.2
 
 	Changes:

@@ -47,6 +47,8 @@ public class TSScan_SalvageReportIntel extends BaseIntelPlugin {
 
     @Override
     public boolean shouldRemoveIntel() {
+        if (system==null)return true;
+
         if (!system.isCurrentLocation()) {
             float daysSince = Global.getSector().getClock().getElapsedDaysSince(removalCheckTimestamp);
             if (daysSince > daysUntilRemoveCheck) {
@@ -63,6 +65,8 @@ public class TSScan_SalvageReportIntel extends BaseIntelPlugin {
 
 
     protected void addBulletPoints(TooltipMakerAPI info, ListInfoMode mode, boolean isUpdate, Color tc, float initPad) {
+        if (system==null)return;
+
         Color h = Misc.getHighlightColor();
 
         SalvageValue value = TSSCan_SalvageableValue.getSystemSalvageableValue();
@@ -143,6 +147,8 @@ public class TSScan_SalvageReportIntel extends BaseIntelPlugin {
 
     @Override
     public void createSmallDescription(TooltipMakerAPI info, float width, float height) {
+        if (system==null)return;
+
         Color h = Misc.getHighlightColor();
         Color tc = Misc.getTextColor();
         float opad = 10f;
@@ -238,6 +244,7 @@ public class TSScan_SalvageReportIntel extends BaseIntelPlugin {
 
 
     public String getName() {
+        if (system==null)return "System-Scale Sensor Burst Results - Unkonwn";
         return "System-Scale Sensor Burst Results - " + system.getBaseName();
     }
 

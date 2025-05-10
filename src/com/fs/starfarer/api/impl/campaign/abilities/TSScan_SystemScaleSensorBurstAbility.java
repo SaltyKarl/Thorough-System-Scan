@@ -109,8 +109,11 @@ public class TSScan_SystemScaleSensorBurstAbility extends BaseDurationAbility {
 		}
 		if (getFleet().isInHyperspace())
 			tooltip.addPara("WARNING: System-Scale Sensor Burst can not be used in hyperspace!",alarm,pad);
-		else {
-			tooltip.addPara("Scanning the current system requires %s units of volatiles.",pad,highlight,""+(int)computeVolatileCost());
+		else if (!(getFleet().getContainingLocation() instanceof StarSystemAPI))
+			tooltip.addPara("WARNING: System-Scale Sensor Burst can not be used due to unknown interference!",alarm,pad);
+		else
+		{
+			tooltip.addPara("Fully scan of the Current System requires unit %s of volatiles",pad,highlight,""+(int)computeVolatileCost());
 			if ((int) computeVolatileCost() > getFleet().getCargo().getCommodityQuantity(Commodities.VOLATILES))
 				tooltip.addPara("WARNING: You have insufficient reserves of volatiles!", alarm, pad);
 			else if (!isInScanLocation())
@@ -155,14 +158,17 @@ public class TSScan_SystemScaleSensorBurstAbility extends BaseDurationAbility {
 	public boolean isUsable() {
 		return super.isUsable() &&
 		(
-			getFleet() != null &&
-			!getFleet().isInHyperspace()&&
 			(
-				isInScanLocation()&&
-				getFleet().getSensorRangeMod().computeEffective(getFleet().getSensorStrength())>= TSScan_Constants.SENSOR_STRENGTH_NEEDED&&
-				computeVolatileCost() <= getFleet().getCargo().getCommodityQuantity(Commodities.VOLATILES)
-			)||
-			Global.getSettings().isDevMode()
+				getFleet() != null &&
+				(
+					isInScanLocation()&&
+					getFleet().getSensorRangeMod().computeEffective(getFleet().getSensorStrength())>= TSScan_Constants.SENSOR_STRENGTH_NEEDED&&
+					computeVolatileCost() <= getFleet().getCargo().getCommodityQuantity(Commodities.VOLATILES)
+				)||
+				Global.getSettings().isDevMode()
+			)&&
+			!getFleet().isInHyperspace()&&
+			getFleet().getContainingLocation() instanceof StarSystemAPI
 		);
 	}
 	protected boolean showAlarm() {

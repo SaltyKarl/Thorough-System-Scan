@@ -68,6 +68,12 @@ Scanning Location
 To do list.
 	Feedback that when Loading the save with new gravity wells scan location would move. (Tagged scan location entities so they are skipped in jump point generation.)
 
+v1.2.3
+
+	bug修复:
+		(也许)修复了内存泄露问题
+		现在星系中心不为星体的星系无需到达扫描位置即可进行扫描了
+
 v1.2.2.1
 
 	Change:

@@ -21,6 +21,12 @@ public class TSScan_SystemScanPointsManager
 
     public static void reload(StarSystemAPI system)
     {
+        if (system.getCenter()==null||!(system.getCenter() instanceof PlanetAPI))
+        {
+            IgnoredSystems.add(system.getId());
+            return;
+        }
+
         SectorEntityToken entity=getEntityOfScanLocation(system);
         List<SectorEntityToken> terrains=system.getEntitiesWithTag(Tags.TERRAIN);
 
@@ -32,7 +38,7 @@ public class TSScan_SystemScanPointsManager
             ((TSScan_LagrangePointAreaPlugin)terrain1.getPlugin()).delete();
         }
 
-        if (entity==null)
+        if (entity==null||entity.getCircularOrbitRadius()<1000f)
         {
             IgnoredSystems.add(system.getId());
             return;
@@ -64,6 +70,11 @@ public class TSScan_SystemScanPointsManager
         ScanPointsOfSystems.put(system.getId(),ScanPoints);
     }
 
+    public static void unload()
+    {
+        IgnoredSystems = new ArrayList<>();
+        ScanPointsOfSystems = new HashMap<>();
+    }
 
     public static SectorEntityToken getEntityOfScanLocation(StarSystemAPI system)
     {

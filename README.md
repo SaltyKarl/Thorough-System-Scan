@@ -68,6 +68,11 @@ Scanning Location
 To do list.
 	Feedback that when Loading the save with new gravity wells scan location would move. (Tagged scan location entities so they are skipped in jump point generation.)
 
+v1.2.3.1
+
+	bug fixes:
+		fix for the volatile needed recalculation.
+
 v1.2.3
 	bug fixes:
 	(maybe) fixed the Memory leaks
